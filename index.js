@@ -1,10 +1,10 @@
-const { parse } = require('css')
+const parse = require('css/lib/parse')
 const stylis = require('stylis')
 
 const SEL = '_'
 const SELRE = new RegExp('^' + SEL)
 
-const toObj = (css, opts) => {
+const toObj = (css, opts = {}) => {
   const wrapped = stylis(SEL, css)
   const ast = parse(wrapped)
   const obj = transform(opts)(ast.stylesheet.rules)
@@ -21,7 +21,7 @@ const transform = opts => (rules, result = {}) => {
     }
 
     const [ selector ] = rule.selectors
-    const key = selector.replace(SELRE, '').trim()
+    const key = selector.trim() === SEL ? '' : selector.replace(SELRE, opts.ampersands ? '&' : '').trim()
 
     if (key.length) {
       Object.assign(result, {
@@ -34,7 +34,7 @@ const transform = opts => (rules, result = {}) => {
   return result
 }
 
-const getDeclarations = (decs, opts = {}) => {
+const getDeclarations = (decs, opts) => {
   const result = decs
     .map(d => ({
       key: opts.camelCase ? camel(d.property) : d.property,
