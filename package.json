@@ -12,6 +12,11 @@
     "style"
   ],
   "author": "Brent Jackson",
+  "contributors": [
+    "Brent Jackson",
+    "Joseph Kohlmann",
+    "meyer"
+  ],
   "license": "MIT",
   "dependencies": {
     "css": "^2.2.1",
