@@ -6,6 +6,10 @@
   "scripts": {
     "test": "ava"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/kohlmannj/css-to-object.git"
+  },
   "keywords": [
     "css",
     "css-in-js",
